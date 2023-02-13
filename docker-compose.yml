@@ -11,6 +11,7 @@ services:
     volumes:
       - ./projdir:/var/www/html
     environment:
+      VIRTUAL_HOST: bo.sample-ec.com
       TZ: Asia/Tokyo
     networks:
       - default

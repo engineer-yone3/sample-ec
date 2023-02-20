@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-COPY ./php.ini /usr/local/etc/php/.
+COPY ./php.ini /usr/local/etc/php/conf.d/.
 COPY ./sites-available/000-default.conf /etc/apache2/sites-available/.
 
 RUN apt-get update \
@@ -8,6 +8,7 @@ RUN apt-get update \
     && docker-php-ext-install pdo pdo_mysql mysqli mbstring
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN a2enmod rewrite
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 

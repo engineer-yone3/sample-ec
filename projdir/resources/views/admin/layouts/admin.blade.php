@@ -12,6 +12,7 @@
 </head>
 <body>
   <header>
+    @include('admin.layouts.nav')
     @yield('pageHeader')
   </header>
   <main>

@@ -11,6 +11,6 @@ class HomeController extends AdminControllerBase
 
     public function home()
     {
-        return $this->adminView('home');
+        return $this->adminView('top.home');
     }
 }

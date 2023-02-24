@@ -25,7 +25,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
     });
     Route::post('login', [AuthController::class, 'adminLogin'])->name('login');
 
-    Route::middleware('auth:admin_users')->group(function () {
+    Route::middleware('auth:admin')->group(function () {
         Route::get('home', [HomeController::class, 'home'])->name('home');
     });
 });

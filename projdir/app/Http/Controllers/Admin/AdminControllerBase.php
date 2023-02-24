@@ -16,6 +16,6 @@ class AdminControllerBase extends Controller
         View::share('htmlTitle', $this->htmlTitle);
         View::share('headerTitle', $this->headerTitle);
 
-        return view($viewName);
+        return view('admin.' . $viewName);
     }
 }

@@ -13,12 +13,18 @@
   @yield('css-block')
 </head>
 <body>
-  <header>
-    @include('admin.layouts.nav')
-    @yield('pageHeader')
-  </header>
-  <main>
-    @yield('mainContents')
-  </main>
+<div class="row h-100">
+  <div class="col col-4 nav-menu w-20">
+    <header>
+      @include('admin.layouts.nav')
+    </header>
+  </div>
+  <div class="col col-8 w-80">
+    <main class="col col-8">
+      @yield('pageHeader')
+      @yield('mainContents')
+    </main>
+  </div>
+</div>
 </body>
 </html>

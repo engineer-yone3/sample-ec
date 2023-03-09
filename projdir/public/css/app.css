@@ -2,6 +2,15 @@ html, body {
     height: 100%;
 }
 
+.pageTitle {
+    margin-top: 1.5em;
+}
+
+.pageTitle h2 {
+    font-weight: bold;
+    color: #AA3333;
+    font-size: 3em;
+}
 
 .nav-menu {
     background-color: #2d3748;

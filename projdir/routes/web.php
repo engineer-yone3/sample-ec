@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,10 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('home', [HomeController::class, 'home'])->name('home');
+
+        Route::prefix('users')->group(function () {
+            Route::get('/', [AdminUserController::class, 'index'])->name('admin-users.index');
+        });
+
     });
 });

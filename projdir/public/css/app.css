@@ -21,6 +21,10 @@ html, body {
     color: black;
 }
 
+.nav-menu li:hover a {
+    color: black;
+}
+
 .menu-item {
     font-size: 2.0em;
     height: 50px;

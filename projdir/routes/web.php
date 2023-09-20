@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.auth.login');
-    });
+    })->name('login.home');
     Route::post('login', [AuthController::class, 'adminLogin'])->name('login');
 
     Route::middleware('auth:admin')->group(function () {

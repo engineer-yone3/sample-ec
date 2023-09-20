@@ -4,7 +4,7 @@ COPY ./php.ini /usr/local/etc/php/conf.d/.
 COPY ./sites-available/000-default.conf /etc/apache2/sites-available/.
 
 RUN apt-get update \
-    && apt-get install -y git vim libpq-dev zip unzip libzip-dev libonig-dev curl \
+    && apt-get install -y git vim libpq-dev zip unzip libzip-dev libonig-dev curl nodejs npm \
     && docker-php-ext-install pdo pdo_mysql mysqli mbstring
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
@@ -18,3 +18,4 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 WORKDIR /var/www/html
 
 EXPOSE 8080
+EXPOSE 5173

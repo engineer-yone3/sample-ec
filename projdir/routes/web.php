@@ -31,6 +31,8 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
         Route::prefix('users')->group(function () {
             Route::get('/', [AdminUserController::class, 'index'])->name('admin-users.index');
+            Route::get('/new', [AdminUserController::class, 'create'])->name('admin-users.create');
+            Route::POST('/update', [AdminUserController::class, 'update'])->name('admin-users.update');
         });
 
     });

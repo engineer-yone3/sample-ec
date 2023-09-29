@@ -195,6 +195,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // add
+        \App\Providers\BusinessLogicServiceProvider::class,
+        \App\Providers\RepositoryProvider::class,
+
     ],
 
     /*

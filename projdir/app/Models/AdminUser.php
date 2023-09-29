@@ -14,7 +14,7 @@ class AdminUser extends Authenticatable
 
     protected $casts = [
         'is_publish' => 'bool',
-        'created_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d H:i',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime'
     ];

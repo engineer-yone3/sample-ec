@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,23 +24,23 @@ class AdminUserUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->id;
+        $id = $this->user_id;
 
         if (empty($id)) {
             return [
-                'email' => ['required', 'email', 'unique'],
+                'email' => ['required', 'email', 'unique:admin_users'],
                 'name' => 'required',
                 'password' => ['required', 'between:8,12', 'same:password_confirm'],
-                'is_publish' => ['required', 'numeric', Rule::in([1, 2])]
+                'is_publish' => ['required', 'numeric', Rule::in([0, 1])]
             ];
         }
 
         return [
-            'id' => ['required', 'exists:admin_users,id'],
+            'user_id' => ['required', 'exists:admin_users,id'],
             'email' => ['required', 'email', Rule::unique('admin_users', 'email')->ignore($id)],
             'name' => 'required',
-            'password' => ['sometimes', 'between:8,12', 'same:password_confirm'],
-            'is_publish' => ['required', 'numeric', Rule::in([1, 2])]
+            'password' => ['nullable', 'between:8,12', 'same:password_confirm'],
+            'is_publish' => ['required', 'numeric', Rule::in([0, 1])]
         ];
     }
 
@@ -51,9 +50,11 @@ class AdminUserUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'user_id' => 'ユーザーID',
             'email' => 'ログインID',
             'name' => '氏名',
             'password' => 'パスワード',
+            'password_confirm' => 'パスワード(確認入力)',
             'is_publish' => '公開状態'
         ];
     }

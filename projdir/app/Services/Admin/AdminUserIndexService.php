@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin;
 
+use App\Models\AdminUser;
 use App\Repositories\Admin\IAdminUserIndexRepository;
 
 class AdminUserIndexService implements IAdminUserIndexService
@@ -25,5 +26,13 @@ class AdminUserIndexService implements IAdminUserIndexService
         }
 
         return $result->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function find(int $id): ?AdminUser
+    {
+        return $this->adminUserIndexRepository->find($id);
     }
 }

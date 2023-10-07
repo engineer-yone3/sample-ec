@@ -14,11 +14,11 @@
   <tbody>
     @foreach($records as $record)
       <tr>
-        <td>{{ $record['id'] }}</td>
+        <td><a href="{{ route('admin.admin-users.edit', $record['id']) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ $record['id'] }}</a></td>
         <td>{{ $record['email'] }}</td>
         <td>{{ $record['name'] }}</td>
         <td>{{ $record['created_at'] }}</td>
-        <td>{{ ($record['is_publish']) ? '有効' : '無効' }}</td>
+        <td>{{ ($record['is_publish']) ? '公開' : '非公開' }}</td>
       </tr>
     @endforeach
   </tbody>

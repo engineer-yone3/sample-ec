@@ -12,6 +12,16 @@ class AdminUser extends Authenticatable
 
     protected $table = 'admin_users';
 
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'is_publish',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
     protected $casts = [
         'is_publish' => 'bool',
         'created_at' => 'datetime:Y-m-d H:i',

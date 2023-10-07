@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\AdminUserIdRequest;
 use App\Http\Requests\Admin\AdminUserIndexRequest;
 use App\Http\Requests\Admin\AdminUserUpdateRequest;
 use App\Services\Admin\IAdminUserIndexService;
+use App\Services\Admin\IAdminUserUpdateService;
 use Illuminate\Contracts\View\View;
 
 class AdminUserController extends AdminControllerBase
 {
 
     public function __construct(
-        private readonly IAdminUserIndexService $adminUserIndexService,
-        protected string                        $htmlTitle = 'Admin画面 アカウント管理',
-        protected string                        $headerTitle = 'アカウント管理',
+        private readonly IAdminUserIndexService  $adminUserIndexService,
+        private readonly IAdminUserUpdateService $adminUserUpdateService,
+        protected string                         $htmlTitle = 'Admin画面 アカウント管理',
+        protected string                         $headerTitle = 'アカウント管理',
     )
     {
     }
@@ -69,5 +72,62 @@ class AdminUserController extends AdminControllerBase
     public function update(AdminUserUpdateRequest $request): View
     {
         $validated = $request->validated();
+        if (empty($validated['user_id'])) {
+            $this->subTitle = 'アカウント新規作成';
+        } else {
+            $this->subTitle = 'アカウント編集';
+        }
+
+
+        try {
+            if (empty($validated['user_id'])) {
+                // 新規作成
+                $this->adminUserUpdateService->register($validated);
+            } else {
+                // 更新
+                $this->adminUserUpdateService->update($validated);
+            }
+
+            $this->addInfo('処理が完了しました');
+        } catch (\Throwable $th) {
+            logger()->error('エラー発生');
+            logger()->error($th->getTraceAsString());
+            $this->addError('不明なエラーが発生しました');
+        }
+
+        $updatedUser = $this->adminUserIndexService->find($validated['user_id']);
+
+        return $this->adminView('adminuser.edit', [
+            'data' => [
+                'id' => $updatedUser->id,
+                'email' => $updatedUser->email,
+                'name' => $updatedUser->name,
+                'is_publish' => $updatedUser->is_publish
+            ]
+        ]);
+    }
+
+    /**
+     * @param AdminUserIdRequest $request
+     * @return View
+     */
+    public function edit(AdminUserIdRequest $request): View
+    {
+        $id = $request->id;
+        $user = $this->adminUserIndexService->find($id);
+        $this->subTitle = 'アカウント編集';
+
+        if (empty($user)) {
+            $this->addError('対象のデータは存在しません');
+        }
+
+        return $this->adminView('adminuser.edit', [
+            'data' => [
+                'id' => $user->id,
+                'email' => $user->email,
+                'name' => $user->name,
+                'is_publish' => $user->is_publish
+            ],
+        ]);
     }
 }

@@ -25,4 +25,12 @@ class AdminUserIndexRepository implements IAdminUserIndexRepository
 
         return $query->get();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function find(int $id): AdminUser
+    {
+        return AdminUser::find($id);
+    }
 }

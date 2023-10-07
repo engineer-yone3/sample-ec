@@ -25,6 +25,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
         return view('admin.auth.login');
     })->name('login.home');
     Route::post('login', [AuthController::class, 'adminLogin'])->name('login');
+    Route::get('logout', [AuthController::class, 'adminLogout'])->name('logout');
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('home', [HomeController::class, 'home'])->name('home');
@@ -33,6 +34,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::get('/', [AdminUserController::class, 'index'])->name('admin-users.index');
             Route::get('/new', [AdminUserController::class, 'create'])->name('admin-users.create');
             Route::POST('/update', [AdminUserController::class, 'update'])->name('admin-users.update');
+            Route::GET('/edit/{id}', [AdminUserController::class, 'edit'])->name('admin-users.edit');
         });
 
     });

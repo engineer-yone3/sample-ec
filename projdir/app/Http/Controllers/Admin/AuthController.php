@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\LoginRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends AdminControllerBase
@@ -19,6 +20,13 @@ class AuthController extends AdminControllerBase
         }
 
         abort(Response::HTTP_UNAUTHORIZED);
+    }
+
+    public function logout(Request $request): View
+    {
+        $request->session()->regenerate();
+        $this->adInfo('ログアウトしました');
+        return $this->adminView('admin.auth.login');
     }
 
 }

@@ -31,6 +31,15 @@
       @endforeach
     </div>
     @endif
+    @if(!empty($infoMessages))
+      <div id="message-context" class="mt-3 border rounded-md bg-green-300">
+        <ul>
+          @foreach($infoMessages as $infoMessage)
+            <li>{{ $infoMessage }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
     <main class="mt-5 container login-form-container">
       {{ Form::open(['url' => url(route('admin.login'))]) }}
       {{ Form::token() }}

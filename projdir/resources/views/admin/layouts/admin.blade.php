@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="row h-100">
-  <div class="col col-4 nav-menu w-20">
+  <div class="col col-4 nav-menu w-20 relative">
     <header>
       @include('admin.layouts.nav')
     </header>

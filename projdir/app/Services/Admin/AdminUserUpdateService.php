@@ -28,4 +28,12 @@ class AdminUserUpdateService implements IAdminUserUpdateService
     {
         $this->adminUserUpdateRepository->userUpdate($params);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(int $id): void
+    {
+        $this->adminUserUpdateRepository->userDelete($id);
+    }
 }

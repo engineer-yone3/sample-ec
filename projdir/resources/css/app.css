@@ -62,3 +62,7 @@ html, body {
 .anchor-button {
     @apply pl-1 pr-2 py-2 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:underline hover:text-blue-200
 }
+
+.delete-button {
+    @apply bg-red-500 hover:bg-red-700 text-white rounded py-2 px-3
+}

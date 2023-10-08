@@ -19,4 +19,11 @@ interface IAdminUserUpdateRepository
      * @throws Exception
      */
     public function userUpdate(array $params): void;
+
+    /**
+     * @param int $id
+     * @return void
+     * @throws Exception
+     */
+    public function userDelete(int $id): void;
 }

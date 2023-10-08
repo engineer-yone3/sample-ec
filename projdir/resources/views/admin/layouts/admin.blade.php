@@ -11,6 +11,7 @@
   <title>{{ $htmlTitle }}</title>
   @yield('js-block')
   @yield('css-block')
+  @livewireStyles
 </head>
 <body>
 <div class="row h-100">
@@ -26,5 +27,6 @@
     </main>
   </div>
 </div>
+@livewireScripts
 </body>
 </html>

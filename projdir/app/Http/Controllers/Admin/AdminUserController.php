@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\AdminUserDeleteRequest;
 use App\Http\Requests\Admin\AdminUserIdRequest;
 use App\Http\Requests\Admin\AdminUserIndexRequest;
 use App\Http\Requests\Admin\AdminUserUpdateRequest;
@@ -69,6 +70,10 @@ class AdminUserController extends AdminControllerBase
         return $this->adminView('adminuser.edit');
     }
 
+    /**
+     * @param AdminUserUpdateRequest $request
+     * @return View
+     */
     public function update(AdminUserUpdateRequest $request): View
     {
         $validated = $request->validated();
@@ -90,7 +95,7 @@ class AdminUserController extends AdminControllerBase
 
             $this->addInfo('処理が完了しました');
         } catch (\Throwable $th) {
-            logger()->error('エラー発生');
+            logger()->error('管理ユーザー登録／更新処理でエラー発生');
             logger()->error($th->getTraceAsString());
             $this->addError('不明なエラーが発生しました');
         }
@@ -129,5 +134,34 @@ class AdminUserController extends AdminControllerBase
                 'is_publish' => $user->is_publish
             ],
         ]);
+    }
+
+    /**
+     * @param AdminUserDeleteRequest $request
+     * @return View
+     */
+    public function delete(AdminUserDeleteRequest $request): View
+    {
+        $id = $request->id;
+        $this->subTitle = 'アカウント一覧';
+
+        try {
+            $this->adminUserUpdateService->delete($id);
+        } catch (\Throwable $th) {
+            logger()->error('管理ユーザー削除処理でエラー発生');
+            logger()->error($th->getTraceAsString());
+            $this->addError('不明なエラーが発生しました');
+        }
+
+        $members = $this->adminUserIndexService->search([]);
+        return $this->adminView('adminuser.index',
+            [
+                'data' => [
+                    'users' => $members,
+                    'search_email' => '',
+                    'search_name' => ''
+                ],
+            ]
+        );
     }
 }

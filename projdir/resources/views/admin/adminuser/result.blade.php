@@ -9,6 +9,7 @@
       <th scope="col">氏名</th>
       <th scope="col">登録日時</th>
       <th scope="col">公開状態</th>
+      <th scope="col">削除</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,9 @@
         <td>{{ $record['name'] }}</td>
         <td>{{ $record['created_at'] }}</td>
         <td>{{ ($record['is_publish']) ? '公開' : '非公開' }}</td>
+        <td>
+          <livewire:delete-confirm-modal :user_id="$record['id']" />
+        </td>
       </tr>
     @endforeach
   </tbody>

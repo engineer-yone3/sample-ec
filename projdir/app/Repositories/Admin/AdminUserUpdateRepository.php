@@ -49,4 +49,18 @@ class AdminUserUpdateRepository implements IAdminUserUpdateRepository
             throw $th;
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function userDelete(int $id): void
+    {
+        try {
+            $user = AdminUser::find($id);
+
+            $user->delete();
+        } catch (\Throwable $th) {
+            logger()->error('【' . __CLASS__ . '】' . '【' . __METHOD__ . '】' . 'DBへの更新処理でエラーが発生しました');
+        }
+    }
 }

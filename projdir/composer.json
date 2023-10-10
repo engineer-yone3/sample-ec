@@ -11,7 +11,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravelcollective/html": "*",
-        "livewire/livewire": "^2.12"
+        "livewire/livewire": "^2.12",
+        "predis/predis": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

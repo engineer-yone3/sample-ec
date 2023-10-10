@@ -10,6 +10,9 @@ RUN apt-get update \
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN a2enmod rewrite
 
+RUN git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
+    && docker-php-ext-install redis
+
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN curl -sS https://getcomposer.org/installer | php -- \

@@ -26,7 +26,6 @@ class AuthController extends AdminControllerBase
     {
         $request->session()->regenerate();
         $this->addInfo('ログアウトしました');
-//        return $this->adminView('admin.auth.login');
         return view('admin.auth.login');
     }
 

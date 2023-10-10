@@ -15,6 +15,7 @@
       margin-bottom: 0;
     }
   </style>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="container-lg">
   <div class="mt-3">
@@ -25,7 +26,7 @@
       </div>
     </header>
     @if($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger mt-3">
       @foreach($errors->all() as $error)
         <p>{{ $error }}</p>
       @endforeach
@@ -40,7 +41,7 @@
         </ul>
       </div>
     @endif
-    <main class="mt-5 container login-form-container">
+    <main class="mt-5 container login-form-container w-1/3">
       {{ Form::open(['url' => url(route('admin.login'))]) }}
       {{ Form::token() }}
       <div class="row align-content-center">
@@ -55,7 +56,7 @@
       </div>
       <div class="mt-2 d-flex align-items-center flex-column">
         <div class="mt-auto">
-          {{ Form::submit('ログイン', ['class' => 'btn btn-primary']) }}
+          {{ Form::submit('ログイン', ['class' => 'bg-blue-500 text-white rounded px-3 py-2 hover:bg-blue-700']) }}
         </div>
       </div>
       {{ Form::close() }}

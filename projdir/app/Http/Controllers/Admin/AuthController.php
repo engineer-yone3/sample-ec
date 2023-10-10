@@ -12,7 +12,7 @@ class AuthController extends AdminControllerBase
 {
     public function adminLogin(LoginRequest $request): Mixed
     {
-        $credencials = $request->only(['email', 'password']);
+        $credencials = array_merge($request->only(['email', 'password']), ['is_publish' => 1]);
 
         if (Auth::guard('admin')->attempt($credencials)) {
             $request->session()->regenerate();
@@ -22,11 +22,12 @@ class AuthController extends AdminControllerBase
         abort(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function logout(Request $request): View
+    public function adminLogout(Request $request): View
     {
         $request->session()->regenerate();
-        $this->adInfo('ログアウトしました');
-        return $this->adminView('admin.auth.login');
+        $this->addInfo('ログアウトしました');
+//        return $this->adminView('admin.auth.login');
+        return view('admin.auth.login');
     }
 
 }

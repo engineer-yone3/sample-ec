@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminUserDeleteRequest extends FormRequest
+class ItemGenreDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class AdminUserDeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'exists:admin_users,id']
+            'id' => ['required', 'exists:genres,id']
         ];
     }
 
@@ -34,7 +34,7 @@ class AdminUserDeleteRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => '管理ユーザーID'
+            'id' => 'ジャンルID'
         ];
     }
 }

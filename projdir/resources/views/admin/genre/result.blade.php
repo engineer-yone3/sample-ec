@@ -17,7 +17,7 @@
         <td>{{ $record['name'] }}</td>
         <td>{{ $record['created_at'] }}</td>
         <td>
-          <p>あとで</p>
+          @livewire('delete-confirm-modal', ['target_id' => $record['id'], 'post_route' => 'admin.genre.delete', 'target_type' => '商品ジャンル'])
         </td>
       </tr>
     @endforeach

@@ -10,7 +10,7 @@
           <!-- Modal header -->
           <div class="flex items-start justify-between p-4 border-b rounded-t">
             <h3 class="text-xl font-semibold text-black">
-              管理ユーザーの削除
+              {{ $target_type }}の削除
             </h3>
             <button type="button" wire:click="closeModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -27,8 +27,8 @@
           </div>
           <!-- Modal footer -->
           <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-            {{ Form::open(['method' => 'POST', 'route' => 'admin.admin-users.delete']) }}
-            {{ Form::hidden('id', $user_id) }}
+            {{ Form::open(['method' => 'POST', 'route' => $post_route]) }}
+            {{ Form::hidden('id', $target_id) }}
             {{ Form::submit('削除する', ['class' => 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800']) }}
             {{ Form::close() }}
 

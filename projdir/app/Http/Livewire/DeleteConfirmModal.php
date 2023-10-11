@@ -6,8 +6,10 @@ use Livewire\Component;
 
 class DeleteConfirmModal extends Component
 {
-    public $showModal = false;
-    public $user_id;
+    public bool $showModal = false;
+    public string $target_type;
+    public int $target_id;
+    public string $post_route;
 
     public function render()
     {

@@ -21,7 +21,7 @@
         <td>{{ $record['created_at'] }}</td>
         <td>{{ ($record['is_publish']) ? '公開' : '非公開' }}</td>
         <td>
-          <livewire:delete-confirm-modal :user_id="$record['id']" />
+          @livewire('delete-confirm-modal', ['target_id' => $record['id'], 'post_route' => 'admin.admin-users.delete', 'target_type' => '管理ユーザー'])
         </td>
       </tr>
     @endforeach

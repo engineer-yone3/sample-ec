@@ -44,7 +44,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::get('/new', [ItemGenreController::class, 'create'])->name('genre.create');
             Route::post('/update', [ItemGenreController::class, 'update'])->name('genre.update');
             Route::get('/edit{id}', [ItemGenreController::class, 'edit'])->name('genre.edit');
-            Route::post('/delete', [ItemGenreController::class, 'create'])->name('genre.delete');
+            Route::post('/delete', [ItemGenreController::class, 'delete'])->name('genre.delete');
         });
 
     });

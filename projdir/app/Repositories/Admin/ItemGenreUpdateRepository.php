@@ -3,7 +3,6 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Genre;
-use App\Repositories\Admin\IItemGenreUpdateRepository;
 
 class ItemGenreUpdateRepository implements IItemGenreUpdateRepository
 {
@@ -13,17 +12,15 @@ class ItemGenreUpdateRepository implements IItemGenreUpdateRepository
      */
     public function create(string $name): int
     {
-        $result = null;
         try {
             $result = Genre::create([
                 'name' => $name,
             ]);
+            return $result->id;
         } catch (\Throwable $th) {
             logger()->error('【' . __CLASS__ . '】' . '【' . __METHOD__ . '】' . 'DBへの登録処理でエラーが発生しました');
             throw $th;
         }
-
-        return !empty($result) ? $result->id : 0;
     }
 
     /**

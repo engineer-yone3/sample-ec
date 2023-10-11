@@ -8,10 +8,10 @@ interface IAdminUserUpdateRepository
 {
     /**
      * @param array $params
-     * @return void
+     * @return int
      * @throws Exception
      */
-    public function userCreate(array $params): void;
+    public function userCreate(array $params): int;
 
     /**
      * @param array $params

@@ -3,7 +3,6 @@
 namespace App\Services\Admin;
 
 use App\Repositories\Admin\IAdminUserUpdateRepository;
-use App\Services\Admin\IAdminUserUpdateService;
 
 class AdminUserUpdateService implements IAdminUserUpdateService
 {
@@ -16,9 +15,9 @@ class AdminUserUpdateService implements IAdminUserUpdateService
     /**
      * @inheritDoc
      */
-    public function register(array $params): void
+    public function register(array $params): int
     {
-        $this->adminUserUpdateRepository->userCreate($params);
+        return $this->adminUserUpdateRepository->userCreate($params);
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace App\Repositories\Admin;
 
 use App\Models\AdminUser;
-use App\Repositories\Admin\IAdminUserUpdateRepository;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUserUpdateRepository implements IAdminUserUpdateRepository
@@ -12,15 +11,16 @@ class AdminUserUpdateRepository implements IAdminUserUpdateRepository
     /**
      * @inheritDoc
      */
-    public function userCreate(array $params): void
+    public function userCreate(array $params): int
     {
         try {
-            AdminUser::create([
+            $result = AdminUser::create([
                 'name' => $params['name'],
                 'email' => $params['email'],
                 'password' => Hash::make($params['password']),
                 'is_publish' => $params['is_publish'],
             ]);
+            return $result->id;
         } catch (\Throwable $th) {
             logger()->error('【' . __CLASS__ . '】' . '【' . __METHOD__ . '】' . 'DBへの登録処理でエラーが発生しました');
             throw $th;

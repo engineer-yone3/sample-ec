@@ -77,18 +77,15 @@ class AdminUserController extends AdminControllerBase
     public function update(AdminUserUpdateRequest $request): View
     {
         $validated = $request->validated();
-        if (empty($validated['user_id'])) {
-            $this->subTitle = 'アカウント新規作成';
-        } else {
-            $this->subTitle = 'アカウント編集';
-        }
-
+        $id = empty($validated['user_id']) ? 0 : $validated['user_id'];
 
         try {
             if (empty($validated['user_id'])) {
+                $this->subTitle = 'アカウント新規作成';
                 // 新規作成
-                $this->adminUserUpdateService->register($validated);
+                $id = $this->adminUserUpdateService->register($validated);
             } else {
+                $this->subTitle = 'アカウント編集';
                 // 更新
                 $this->adminUserUpdateService->update($validated);
             }
@@ -100,7 +97,7 @@ class AdminUserController extends AdminControllerBase
             $this->addError('不明なエラーが発生しました');
         }
 
-        $updatedUser = $this->adminUserIndexService->find($validated['user_id']);
+        $updatedUser = $this->adminUserIndexService->find($id);
 
         return $this->adminView('adminuser.edit', [
             'data' => [

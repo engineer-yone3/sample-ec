@@ -8,10 +8,10 @@ interface IAdminUserUpdateService
 {
     /**
      * @param array $params
-     * @return void
+     * @return int
      * @throws Exception
      */
-    public function register(array $params): void;
+    public function register(array $params): int;
 
     /**
      * @param array $params

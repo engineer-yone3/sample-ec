@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\AdminUser;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminUserDeleteRequest extends FormRequest
@@ -36,5 +37,22 @@ class AdminUserDeleteRequest extends FormRequest
         return [
             'id' => '管理ユーザーID'
         ];
+    }
+
+    /**
+     * @param $validator
+     * @return void
+     */
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $id = $this->input('id');
+
+            $count = AdminUser::where('id', '<>', $id)->count();
+
+            if ($count === 0) {
+                $validator->errors()->add('id', '管理ユーザーは最低１人は必要です');
+            }
+        });
     }
 }
